@@ -1,10 +1,11 @@
-package org.hm.jdbc.chap08;
+package org.hm.jdbc.chap08_1;
 
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hm.jdbc.chap03.Member;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,15 +17,12 @@ import org.springframework.stereotype.Service;
 public class MemberService {
 
 	Logger logger = LogManager.getLogger();
-
-	MemberDao memberDao = null;
+	@Autowired
+	MemberDao memberDao;
 
 	/**
 	 * memberDao setter for injection
 	 */
-	public void setMemberDao(MemberDao memberDao) {
-		this.memberDao = memberDao;
-	}
 
 	public void selectAll() {
 		List<Member> members = memberDao.selectAll(0, 100);
@@ -40,7 +38,7 @@ public class MemberService {
 
 	public void insertMember() {
 		Member member = new Member();
-		member.setEmail("jhm9063@naver.com");
+		member.setEmail("jhm9063.@naver.com");
 		member.setPassword("a");
 		member.setName("정해민");
 		memberDao.insert(member);
